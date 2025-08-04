@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require_relative "../app/services/log_processor"
+
+LogProcessor.new("game_log_large.txt").process
