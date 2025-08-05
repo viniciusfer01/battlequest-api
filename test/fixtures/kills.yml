@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  killer: one
+  victim: one
+  method: MyString
+
+two:
+  killer: two
+  victim: two
+  method: MyString
