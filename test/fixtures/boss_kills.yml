@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player: one
+  boss_name: MyString
+  xp_gained: 1
+  gold_gained: 1
+
+two:
+  player: two
+  boss_name: MyString
+  xp_gained: 1
+  gold_gained: 1

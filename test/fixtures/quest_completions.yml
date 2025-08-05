@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player: one
+  quest_id: MyString
+  xp_gained: 1
+  gold_gained: 1
+
+two:
+  player: two
+  quest_id: MyString
+  xp_gained: 1
+  gold_gained: 1
