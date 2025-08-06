@@ -1,9 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+zezin:
   name: Zezin
   score: 1
 
-two:
+chiquin:
   name: Chiquin
   score: 2
+
+toin:
+  name: Toin
+  score: 10
+
+manezin:
+  name: Manezin
+  score: 20
+
+
