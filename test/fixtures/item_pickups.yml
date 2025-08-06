@@ -8,7 +8,7 @@ one:
 two:
   player: chiquin
   item_name: mana_potion
-  quantity: 1
+  quantity: 6
 
 three:
   player: zezin
