@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get "items/top"
       get "events/index"
       get "leaderboard/index"
       resources :players, only: [ :index ] do

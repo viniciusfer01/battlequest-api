@@ -16,13 +16,13 @@ class Api::V1::EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should respect a custom limit parameter" do
-  custom_limit = 10
+    custom_limit = 10
 
-  get api_v1_events_index_url, params: { limit: custom_limit }
+    get api_v1_events_index_url, params: { limit: custom_limit }
 
-  assert_response :success
+    assert_response :success
 
-  events_from_response = JSON.parse(response.body)
-  assert_equal custom_limit, events_from_response.length
-end
+    events_from_response = JSON.parse(response.body)
+    assert_equal custom_limit, events_from_response.length
+  end
 end
