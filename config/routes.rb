@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get "leaderboard/index"
       resources :players, only: [ :index ] do
         member do
           get :stats
         end
       end
+      get "/leaderboard", to: "leaderboard#index"
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
