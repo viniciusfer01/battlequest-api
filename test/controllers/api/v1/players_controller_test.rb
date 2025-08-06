@@ -29,9 +29,9 @@ class Api::V1::PlayersControllerTest < ActionDispatch::IntegrationTest
     assert_equal player.id, JSON.parse(response.body)["player_id"]
     assert_equal player.name, JSON.parse(response.body)["name"]
     assert_equal player.score, JSON.parse(response.body)["score"]
-    assert_equal 1, JSON.parse(response.body)["kills"]
+    assert_equal 2, JSON.parse(response.body)["kills"]
     assert_equal 0, JSON.parse(response.body)["deaths"]
     assert_equal 16, JSON.parse(response.body)["items_collected"]
-    assert_equal 1, JSON.parse(response.body)["quests_completed"]
+    assert_equal 2, JSON.parse(response.body)["quests_completed"]
   end
 end

@@ -11,3 +11,15 @@ two:
   boss_name: Dragon
   xp_gained: 100
   gold_gained: 10
+
+three:
+  player: toin
+  boss_name: Medusa
+  xp_gained: 50
+  gold_gained: 50
+
+four:
+  player: manezin
+  boss_name: Kraken
+  xp_gained: 200
+  gold_gained: 200 

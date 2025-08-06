@@ -9,3 +9,13 @@ two:
   killer: toin
   victim: manezin
   method: Bow
+
+three:
+  killer: zezin
+  victim: toin
+  method: Magic
+
+four:
+  killer: manezin
+  victim: chiquin
+  method: Axe

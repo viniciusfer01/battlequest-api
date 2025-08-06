@@ -11,3 +11,33 @@ two:
   quest_id: q2
   xp_gained: 10
   gold_gained: 1100
+
+three:
+  player: toin
+  quest_id: q3
+  xp_gained: 10
+  gold_gained: 1100
+
+four:
+  player: manezin
+  quest_id: q1
+  xp_gained: 10
+  gold_gained: 1100
+
+five:
+  player: zezin
+  quest_id: q2
+  xp_gained: 10
+  gold_gained: 1100
+
+six:
+  player: chiquin
+  quest_id: q3
+  xp_gained: 10
+  gold_gained: 1100
+
+seven:
+  player: toin
+  quest_id: q1
+  xp_gained: 10
+  gold_gained: 1100
