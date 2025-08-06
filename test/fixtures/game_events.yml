@@ -1,11 +1,307 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  raw_event: MyText
-  event_type: MyString
-  event_timestamp: 2025-08-04 21:06:56
+event_1:
+  raw_event: |
+    2025-08-04 14:00:27 [COMBAT] BOSS_DEFEAT boss_name=GolemKing defeated_by=p2 xp=4752 gold=483
+  event_type: BOSS_DEFEAT
+  event_timestamp: 2025-08-04 14:00:27
 
-two:
-  raw_event: MyText
-  event_type: MyString
-  event_timestamp: 2025-08-04 21:06:56
+event_2:
+  raw_event: |
+    2025-08-04 14:00:53 [COMBAT] BOSS_DEFEAT boss_name=ShadowDragon defeated_by=p3 xp=3955 gold=801
+  event_type: BOSS_DEFEAT
+  event_timestamp: 2025-08-04 14:00:53
+
+event_3:
+  raw_event: |
+    2025-08-04 14:00:54 [CHAT] MESSAGE player_id=p2 message="Respawning now"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:00:54
+
+event_4:
+  raw_event: |
+    2025-08-04 14:01:14 [CHAT] MESSAGE player_id=p1 message=GG!
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:01:14
+
+event_5:
+  raw_event: |
+    2025-08-04 14:01:44 [CHAT] MESSAGE player_id=p1 message="Need potions"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:01:44
+
+event_6:
+  raw_event: |
+    2025-08-04 14:02:06 [GAME] QUEST_START player_id=p2 quest_id=q285 name="Quest q285"
+  event_type: QUEST_START
+  event_timestamp: 2025-08-04 14:02:06
+
+event_7:
+  raw_event: |
+    2025-08-04 14:02:14 [SYSTEM] SERVER_ANNOUNCEMENT text="Double XP event started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:02:14
+
+event_8:
+  raw_event: |
+    2025-08-04 14:02:17 [COMBAT] DEATH victim_id=p3 killer_id=p1 method=sword
+  event_type: DEATH
+  event_timestamp: 2025-08-04 14:02:17
+
+event_9:
+  raw_event: |
+    2025-08-04 14:02:19 [GAME] ZONE_ENTER player_id=p2 zone=AncientRuins
+  event_type: ZONE_ENTER
+  event_timestamp: 2025-08-04 14:02:19
+
+event_10:
+  raw_event: |
+    2025-08-04 14:02:20 [CHAT] MESSAGE player_id=p1 message="Boss is spawning soon!"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:02:20
+
+event_11:
+  raw_event: |
+    2025-08-04 14:02:56 [CHAT] MESSAGE player_id=p4 message="Boss is spawning soon!"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:02:56
+
+event_12:
+  raw_event: |
+    2025-08-04 14:03:20 [COMBAT] BOSS_DAMAGE player_id=p3 boss_name=ShadowDragon damage=614
+  event_type: BOSS_DAMAGE
+  event_timestamp: 2025-08-04 14:03:20
+
+event_13:
+  raw_event: |
+    2025-08-04 14:03:39 [CHAT] MESSAGE player_id=p3 message="Anyone need help?"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:03:39
+
+event_14:
+  raw_event: |
+    2025-08-04 14:04:00 [SYSTEM] SERVER_ANNOUNCEMENT text="PvP tournament registration open"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:04:00
+
+event_15:
+  raw_event: |
+    2025-08-04 14:04:25 [CHAT] MESSAGE player_id=p1 message="Going to the cave"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:04:25
+
+event_16:
+  raw_event: |
+    2025-08-04 14:04:52 [COMBAT] BOSS_DEFEAT boss_name=GolemKing defeated_by=p2 xp=4187 gold=862
+  event_type: BOSS_DEFEAT
+  event_timestamp: 2025-08-04 14:04:52
+
+event_17:
+  raw_event: |
+    2025-08-04 14:04:57 [SYSTEM] SERVER_ANNOUNCEMENT text="Treasure hunt started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:04:57
+
+event_18:
+  raw_event: |
+    2025-08-04 14:05:19 [CHAT] MESSAGE player_id=p1 message="Respawning now"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:05:19
+
+event_19:
+  raw_event: |
+    2025-08-04 14:05:31 [SYSTEM] SERVER_ANNOUNCEMENT text="World boss will spawn soon"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:05:31
+
+event_20:
+  raw_event: |
+    2025-08-04 14:05:59 [INFO] PLAYER_JOIN id=p6 name=Frank level=39 zone=MysticLake
+  event_type: PLAYER_JOIN
+  event_timestamp: 2025-08-04 14:05:59
+
+event_21:
+  raw_event: |
+    2025-08-04 14:06:14 [SYSTEM] SERVER_ANNOUNCEMENT text="Treasure hunt started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:06:14
+
+event_22:
+  raw_event: |
+    2025-08-04 14:06:45 [INFO] PLAYER_JOIN id=p6 name=Frank level=21 zone=GreenFields
+  event_type: PLAYER_JOIN
+  event_timestamp: 2025-08-04 14:06:45
+
+event_23:
+  raw_event: |
+    2025-08-04 14:06:46 [GAME] PLAYER_RESPAWN player_id=p6 location=(101,67) hp=100
+  event_type: PLAYER_RESPAWN
+  event_timestamp: 2025-08-04 14:06:46
+
+event_24:
+  raw_event: |
+    2025-08-04 14:06:52 [CHAT] MESSAGE player_id=p6 message="Team up?"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:06:52
+
+event_25:
+  raw_event: |
+    2025-08-04 14:06:57 [COMBAT] DEATH victim_id=p1 killer_id=p3 method=sword
+  event_type: DEATH
+  event_timestamp: 2025-08-04 14:06:57
+
+event_26:
+  raw_event: |
+    2025-08-04 14:07:24 [COMBAT] BOSS_DEFEAT boss_name=LichQueen defeated_by=p4 xp=1619 gold=679
+  event_type: BOSS_DEFEAT
+  event_timestamp: 2025-08-04 14:07:24
+
+event_27:
+  raw_event: |
+    2025-08-04 14:07:28 [GAME] QUEST_START player_id=p1 quest_id=q593 name="Quest q593"
+  event_type: QUEST_START
+  event_timestamp: 2025-08-04 14:07:28
+
+event_28:
+  raw_event: |
+    2025-08-04 14:07:53 [SYSTEM] SERVER_ANNOUNCEMENT text="PvP tournament registration open"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:07:53
+
+event_29:
+  raw_event: |
+    2025-08-04 14:08:14 [INFO] PLAYER_JOIN id=p6 name=Frank level=33 zone=MysticLake
+  event_type: PLAYER_JOIN
+  event_timestamp: 2025-08-04 14:08:14
+
+event_30:
+  raw_event: |
+    2025-08-04 14:08:15 [GAME] ZONE_EXIT player_id=p3 zone=DarkCave
+  event_type: ZONE_EXIT
+  event_timestamp: 2025-08-04 14:08:15
+
+event_31:
+  raw_event: |
+    2025-08-04 14:08:31 [CHAT] MESSAGE player_id=p6 message="Need potions"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:08:31
+
+event_32:
+  raw_event: |
+    2025-08-04 14:08:45 [COMBAT] BOSS_DAMAGE player_id=p2 boss_name=LichQueen damage=423
+  event_type: BOSS_DAMAGE
+  event_timestamp: 2025-08-04 14:08:45
+
+event_33:
+  raw_event: |
+    2025-08-04 14:09:16 [SYSTEM] SERVER_ANNOUNCEMENT text="Welcome to BattleQuest!"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:09:16
+
+event_34:
+  raw_event: |
+    2025-08-04 14:09:32 [CHAT] MESSAGE player_id=p5 message="Boss is spawning soon!"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:09:32
+
+event_35:
+  raw_event: |
+    2025-08-04 14:09:45 [GAME] QUEST_COMPLETE player_id=p1 quest_id=q999 xp=222 gold=77
+  event_type: QUEST_COMPLETE
+  event_timestamp: 2025-08-04 14:09:45
+
+event_36:
+  raw_event: |
+    2025-08-04 14:09:52 [GAME] ITEM_PICKUP player_id=p5 item=health_potion qty=9 location=(90,95)
+  event_type: ITEM_PICKUP
+  event_timestamp: 2025-08-04 14:09:52
+
+event_37:
+  raw_event: |
+    2025-08-04 14:10:21 [CHAT] MESSAGE player_id=p1 message="Watch out for traps"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:10:21
+
+event_38:
+  raw_event: |
+    2025-08-04 14:10:35 [SYSTEM] SERVER_ANNOUNCEMENT text="Double XP event started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:10:35
+
+event_39:
+  raw_event: |
+    2025-08-04 14:10:57 [GAME] PLAYER_RESPAWN player_id=p2 location=(66,135) hp=100
+  event_type: PLAYER_RESPAWN
+  event_timestamp: 2025-08-04 14:10:57
+
+event_40:
+  raw_event: |
+    2025-08-04 14:11:15 [SYSTEM] SERVER_ANNOUNCEMENT text="Double XP event started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:11:15
+
+event_41:
+  raw_event: |
+    2025-08-04 14:11:47 [SYSTEM] SERVER_ANNOUNCEMENT text="PvP tournament registration open"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:11:47
+
+event_42:
+  raw_event: |
+    2025-08-04 14:12:13 [CHAT] MESSAGE player_id=p2 message="Headed to MysticLake"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:12:13
+
+event_43:
+  raw_event: |
+    2025-08-04 14:13:02 [SYSTEM] SERVER_ANNOUNCEMENT text="Treasure hunt started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:13:02
+
+event_44:
+  raw_event: |
+    2025-08-04 14:13:10 [SYSTEM] SERVER_ANNOUNCEMENT text="Double XP event started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:13:10
+
+event_45:
+  raw_event: |
+    2025-08-04 14:13:30 [CHAT] MESSAGE player_id=p3 message="Respawning now"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:13:30
+
+event_46:
+  raw_event: |
+    2025-08-04 14:13:45 [CHAT] MESSAGE player_id=p5 message="Going to the cave"
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:13:45
+
+event_47:
+  raw_event: |
+    2025-08-04 14:13:47 [SYSTEM] SERVER_ANNOUNCEMENT text="World boss will spawn soon"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:13:47
+
+event_48:
+  raw_event: |
+    2025-08-04 14:14:09 [CHAT] MESSAGE player_id=p5 message=GG!
+  event_type: MESSAGE
+  event_timestamp: 2025-08-04 14:14:09
+
+event_49:
+  raw_event: |
+    2025-08-04 14:14:39 [SYSTEM] SERVER_ANNOUNCEMENT text="Treasure hunt started"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:14:39
+
+event_50:
+  raw_event: |
+    2025-08-04 14:14:47 [COMBAT] BOSS_DEFEAT boss_name=ShadowDragon defeated_by=p6 xp=4504 gold=325
+  event_type: BOSS_DEFEAT
+  event_timestamp: 2025-08-04 14:14:47
+
+event_51:
+  raw_event: |
+    2025-08-04 14:14:58 [SYSTEM] SERVER_ANNOUNCEMENT text="Welcome to BattleQuest!"
+  event_type: SERVER_ANNOUNCEMENT
+  event_timestamp: 2025-08-04 14:14:58
