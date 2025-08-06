@@ -1,11 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  player: one
-  item_name: MyString
-  quantity: 1
+  player: zezin
+  item_name: health_potion
+  quantity: 15
 
 two:
-  player: two
-  item_name: MyString
+  player: chiquin
+  item_name: mana_potion
+  quantity: 1
+
+three:
+  player: zezin
+  item_name: sword
   quantity: 1

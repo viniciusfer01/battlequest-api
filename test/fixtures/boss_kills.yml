@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  player: one
-  boss_name: MyString
-  xp_gained: 1
-  gold_gained: 1
+  player: zezin
+  boss_name: Medusa
+  xp_gained: 10
+  gold_gained: 100
 
 two:
-  player: two
-  boss_name: MyString
-  xp_gained: 1
-  gold_gained: 1
+  player: chiquin
+  boss_name: Dragon
+  xp_gained: 100
+  gold_gained: 10
