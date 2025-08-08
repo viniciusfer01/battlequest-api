@@ -22,3 +22,15 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+How to run:
+- `$ bundle install`
+- `$ rails db:migrate`
+- `$ rails db:seed`
+- `$ rails s`
+
+How to process new logs:
+- `$ rails log:import`
+
+How to run the tests
+- `$ rails test`
