@@ -1,6 +1,6 @@
-require 'test_helper'
-require 'rake'
-require 'mocha/minitest' 
+require "test_helper"
+require "rake"
+require "mocha/minitest"
 
 class LogImporterTest < ActiveSupport::TestCase
   setup do
@@ -8,12 +8,12 @@ class LogImporterTest < ActiveSupport::TestCase
     ItemPickup.delete_all
     BossKill.delete_all
     QuestCompletion.delete_all
-    
+
     Player.delete_all
     GameEvent.delete_all
-    
+
     BattlequestApi::Application.load_tasks if Rake::Task.tasks.empty?
-    Rake::Task['log:import'].reenable
+    Rake::Task["log:import"].reenable
   end
 
   teardown do
@@ -28,11 +28,11 @@ class LogImporterTest < ActiveSupport::TestCase
     LOG
     create_temp_log_file(log_content)
 
-    assert_difference('GameEvent.count', 3) do
-      Rake::Task['log:import'].invoke
+    assert_difference("GameEvent.count", 3) do
+      Rake::Task["log:import"].invoke
     end
 
-    assert_equal 2, Player.count 
+    assert_equal 2, Player.count
     assert_equal 1, ItemPickup.count
     assert_equal 1, Kill.count
   end
@@ -51,8 +51,8 @@ class LogImporterTest < ActiveSupport::TestCase
     LOG
     create_temp_log_file(log_content)
 
-    assert_difference('GameEvent.count', 2) do
-      Rake::Task['log:import'].invoke
+    assert_difference("GameEvent.count", 2) do
+      Rake::Task["log:import"].invoke
     end
   end
 
@@ -61,22 +61,22 @@ class LogImporterTest < ActiveSupport::TestCase
       2025-08-05 10:00:00 [INFO] PLAYER_JOIN id=p1 name=Alice level=1 zone=Start
     LOG
     create_temp_log_file(log_content)
-    Rake::Task['log:import'].invoke
-    Rake::Task['log:import'].reenable 
+    Rake::Task["log:import"].invoke
+    Rake::Task["log:import"].reenable
 
-    assert_no_difference('GameEvent.count') do
-      Rake::Task['log:import'].invoke
+    assert_no_difference("GameEvent.count") do
+      Rake::Task["log:import"].invoke
     end
   end
 
   private
 
   def create_temp_log_file(content)
-    @temp_log = Tempfile.new('test_log.txt')
+    @temp_log = Tempfile.new("test_log.txt")
     @temp_log.write(content)
     @temp_log.close
     @log_path = @temp_log.path
 
-    Rails.root.stubs(:join).with('game_log_large.txt').returns(@log_path)
+    Rails.root.stubs(:join).with("game_log_large.txt").returns(@log_path)
   end
 end
