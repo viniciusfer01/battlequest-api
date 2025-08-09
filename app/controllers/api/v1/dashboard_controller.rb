@@ -1,4 +1,7 @@
 class Api::V1::DashboardController < ApplicationController
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+
+  before_action :authenticate
   def index
     dashboard_data = {
       active_players: Player.count,
@@ -9,5 +12,14 @@ class Api::V1::DashboardController < ApplicationController
       completed_quests: QuestCompletion.group(:quest_id).count.transform_values { |count| count }
     }
     render json: dashboard_data
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      ApiToken.find_each do |api_token|
+        return true if ActiveSupport::SecurityUtils.secure_compare(api_token.token, token)
+      end
+      false
+    end
   end
 end
