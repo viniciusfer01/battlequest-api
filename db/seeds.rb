@@ -8,6 +8,10 @@ BossKill.delete_all
 GameEvent.delete_all
 Player.delete_all
 
+puts "Criando token de acesso..."
+token = ApiToken.create!
+puts "Token de acesso criado: #{token.token}"
+
 puts "Processando o log do jogo..."
 LogParser.parse('game_log_large.txt')
 
