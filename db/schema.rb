@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_05_020845) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_08_235103) do
+  create_table "api_tokens", force: :cascade do |t|
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_api_tokens_on_token"
+  end
+
   create_table "boss_kills", force: :cascade do |t|
     t.integer "player_id", null: false
     t.string "boss_name", null: false
