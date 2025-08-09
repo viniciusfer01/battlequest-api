@@ -42,7 +42,7 @@ All endpoints are prefixed with `/api/v1/`.
 ### Items
 
 - `GET /api/v1/items/top`  
-  List top 50 items collected, ordered by quantity.
+  List top 50 most collected items at a time, ordered by quantity.
 
 ### Events
 
@@ -55,7 +55,7 @@ All endpoints are prefixed with `/api/v1/`.
   Returns:
   - `active_players`: Total number of players
   - `total_score`: Sum of all player scores
-  - `top_items`: Top 5 items collected
+  - `top_items`: Top 5 items collected overall
   - `top_killers`: Top 5 players by kills
   - `bosses_defeated`: Count of each boss defeated
   - `completed_quests`: Count of each quest completed
