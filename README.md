@@ -63,6 +63,10 @@ All endpoints are prefixed with `/api/v1/`.
   **Authentication:**  
   Pass a valid API token in the `Authorization` header:  
   `Authorization: Bearer <token>`
+  When `$ rails db:seed` is executed, it outputs an access token on the terminal:
+  `Token de acesso criado: <your-access-token>`
+  Then, it's possible to access the dashboard endpoint with
+  `$ curl -H "Authorization: Bearer <your-access-token>" http://localhost:3000/api/v1/dashboard/index`
 
 ---
 
