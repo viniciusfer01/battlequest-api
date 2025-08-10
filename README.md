@@ -13,7 +13,7 @@ Battlequest API is a Ruby on Rails application that processes logs from Battlequ
 
 ## Models
 
-- **Player:** Stores player information (`id`, `name`, `score`).
+- **Player:** Stores player information (`id`, `name`, `score`, `xp`, `gold`).
 - **Kill:** Records kills between players (`killer_id`, `victim_id`, `method`).
 - **ItemPickup:** Tracks items collected by players (`player_id`, `item_name`, `quantity`).
 - **QuestCompletion:** Logs quest completions (`player_id`, `quest_id`, `xp_gained`, `gold_gained`).
@@ -30,15 +30,41 @@ All endpoints are prefixed with `/api/v1/`.
 ### Players
 
 - `GET /api/v1/players`  
-  List all players.
+  List all players with basic information.
 
 - `GET /api/v1/players/:id/stats`  
-  Show stats for a specific player (kills, deaths, items collected, quests completed, score).
+  Shows detailed stats for a specific player, including:
+
+- Basic info (id, name, score, gold, xp)
+
+- Combat stats (kills, deaths, nemesis)
+
+- Collections (bosses_killed_names, collected_item_names)
+
+- Quest progress (quests_started, quests_completed, started_quest_names, finished_quest_names)
+
+- PvP stats (killed_player_names)
+
+- `GET /api/v1/players/:player_id/quests/started`
+
+  Lists all quests a player has started but not yet completed. Supports a limit parameter.
+
+- `GET /api/v1/players/:player_id/quests/completed`
+
+  Lists all quests a player has completed. Supports a limit parameter.
 
 ### Leaderboard
 
 - `GET /api/v1/leaderboard`  
-  List players ordered by score (descending).
+  List players ordered by score (default).
+
+- `GET api/v1/leaderboard/gold`
+
+  Lists players ordered by total gold.
+
+- `GET api/v1/leaderboard/xp`
+
+  Lists players ordered by total XP.
 
 ### Items
 
@@ -77,8 +103,9 @@ All endpoints are prefixed with `/api/v1/`.
 
 - `$ bundle install`
 
-### 2. Run migrations
+### 2. Create DB and run migrations
 
+- `$ bin/rails db:create`
 - `$ bin/rails db:migrate`
 
 ### 3. Apply seeds

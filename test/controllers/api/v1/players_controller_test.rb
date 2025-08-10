@@ -1,37 +1,69 @@
 require "test_helper"
 
 class Api::V1::PlayersControllerTest < ActionDispatch::IntegrationTest
-  test "should show players" do
-    player1 = players(:zezin)
-    player2 = players(:chiquin)
-
-    get api_v1_players_url
-
-    assert_response :success
-    assert_equal player1.id, JSON.parse(response.body)[3]["id"]
-    assert_equal player1.name, JSON.parse(response.body)[3]["name"]
-    assert_equal player1.score, JSON.parse(response.body)[3]["score"]
-    assert_equal player2.id, JSON.parse(response.body)[0]["id"]
-    assert_equal player2.name, JSON.parse(response.body)[0]["name"]
-    assert_equal player2.score, JSON.parse(response.body)[0]["score"]
+ setup do
+    Kill.delete_all
+    ItemPickup.delete_all
+    QuestStart.delete_all
+    QuestCompletion.delete_all
+    BossKill.delete_all
   end
 
-  test "should show player stats" do
-    player = players(:zezin)
-    kills(:one)
-    item_pickups(:one)
-    quest_completions(:one)
-    boss_kills(:one)
-
-    get stats_api_v1_player_url(player)
-
+  test "should show players" do
+    get api_v1_players_url
     assert_response :success
-    assert_equal player.id, JSON.parse(response.body)["player_id"]
-    assert_equal player.name, JSON.parse(response.body)["name"]
-    assert_equal player.score, JSON.parse(response.body)["score"]
-    assert_equal 2, JSON.parse(response.body)["kills"]
-    assert_equal 0, JSON.parse(response.body)["deaths"]
-    assert_equal 16, JSON.parse(response.body)["items_collected"]
-    assert_equal 2, JSON.parse(response.body)["quests_completed"]
+    assert_equal 4, JSON.parse(response.body).length
+  end
+
+  test "should show detailed player stats" do
+    zezin = players(:zezin)
+    chiquin = players(:chiquin)
+    toin = players(:toin)
+    manezin = players(:manezin)
+
+    Kill.create!(killer: zezin, victim: chiquin, method: "sword")
+    Kill.create!(killer: zezin, victim: toin, method: "bow")
+
+    Kill.create!(killer: manezin, victim: zezin, method: "axe")
+    Kill.create!(killer: manezin, victim: zezin, method: "axe")
+    Kill.create!(killer: toin, victim: zezin, method: "spell")
+
+    ItemPickup.create!(player: zezin, item_name: "Sword", quantity: 1)
+    ItemPickup.create!(player: zezin, item_name: "Potion", quantity: 15)
+
+    QuestStart.create!(player: zezin, quest_id: "q1", quest_name: "Slay the Dragon")
+    QuestStart.create!(player: zezin, quest_id: "q2", quest_name: "Find the Lost Amulet")
+    QuestCompletion.create!(player: zezin, quest_id: "q1", xp_gained: 1000, gold_gained: 500)
+
+    BossKill.create!(player: zezin, boss_name: "Medusa", xp_gained: 1000, gold_gained: 500)
+    BossKill.create!(player: zezin, boss_name: "Dragon", xp_gained: 2000, gold_gained: 1000)
+
+    zezin.update!(gold: 1500, xp: 3000)
+
+    get stats_api_v1_player_url(zezin)
+    assert_response :success
+
+    stats = JSON.parse(response.body)
+
+    assert_equal zezin.id, stats["player_id"]
+    assert_equal "Zezin", stats["name"]
+    assert_equal 1500, stats["gold"]
+    assert_equal 3000, stats["xp"]
+    assert_equal 2, stats["kills"]
+    assert_equal 3, stats["deaths"]
+    assert_equal 16, stats["items_collected"]
+    assert_equal 1, stats["quests_completed"]
+    assert_equal 2, stats["quests_started"]
+    assert_equal [ "Dragon", "Medusa" ].sort, stats["bosses_killed_names"].sort
+    assert_equal [ "Potion", "Sword" ].sort, stats["collected_item_names"].sort
+    assert_equal [ "Chiquin", "Toin" ].sort, stats["killed_player_names"].sort
+    assert_equal "Manezin", stats["nemesis"]
+  end
+
+  test "should return 404 if player not found" do
+    get stats_api_v1_player_url(id: "nonexistent")
+
+    assert_response :not_found
+    assert_equal({ "error" => "Player not found" }, JSON.parse(response.body))
   end
 end
