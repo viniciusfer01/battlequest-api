@@ -11,6 +11,8 @@ Rails.application.routes.draw do
         end
       end
       get "/leaderboard", to: "leaderboard#index"
+      get "/leaderboard/gold", to: "leaderboard#index", defaults: { type: "gold" }
+      get "/leaderboard/xp", to: "leaderboard#index", defaults: { type: "xp" }
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
