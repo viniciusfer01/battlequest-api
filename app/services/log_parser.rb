@@ -6,26 +6,27 @@ class LogParser
   end
 
   def self.parse_line(line)
-    return if line.strip.empty?
+    stripped_line = line.strip
+    return if stripped_line.empty?
 
-    timestamp_str, time_str, _, event_type, *data_pairs = line.strip.split(/\s+/, 5)
+    timestamp_str, time_str, _, event_type, *data_pairs = stripped_line.split(/\s+/, 5)
     return unless event_type
 
     begin
-      timestamp = Time.parse("#{timestamp_str} #{time_str}")
+      timestamp = Time.zone.parse("#{timestamp_str} #{time_str}")
       data_string = data_pairs.first || ""
       data = data_string.scan(/(\w+)="([^"]*)"|(\w+)=([\w\d.-]+)/).to_h do |match|
         [ match[0] || match[2], match[1] || match[3] ]
       end
     rescue ArgumentError
-      puts "Skipping malformed line: #{line.strip}"
+      puts "Skipping malformed line: #{stripped_line}"
       return
     end
 
-    return if GameEvent.exists?(event_timestamp: timestamp, raw_event: line)
+    return if GameEvent.exists?(event_timestamp: timestamp, raw_event: stripped_line)
 
     GameEvent.create(
-      raw_event: line,
+      raw_event: stripped_line,
       event_type: event_type,
       event_timestamp: timestamp
     )
@@ -37,6 +38,8 @@ class LogParser
       player = Player.find_or_initialize_by(id: data["id"].gsub("p", ""))
       player.name = data["name"]
       player.score ||= 0
+      player.gold ||= 0
+      player.xp ||= 0
       player.save!
     when "DEATH"
       killer = self.find_or_create_placeholder_player(data["killer_id"])
@@ -47,9 +50,15 @@ class LogParser
       ItemPickup.create(player: player, item_name: data["item"], quantity: data["qty"].to_i)
     when "QUEST_COMPLETE"
       player = self.find_or_create_placeholder_player(data["player_id"])
+      player.xp += data["xp"].to_i
+      player.gold += data["gold"].to_i
+      player.save!
       QuestCompletion.create(player: player, quest_id: data["quest_id"], xp_gained: data["xp"].to_i, gold_gained: data["gold"].to_i)
     when "BOSS_DEFEAT"
       player = self.find_or_create_placeholder_player(data["defeated_by"])
+      player.xp += data["xp"].to_i
+      player.gold += data["gold"].to_i
+      player.save!
       BossKill.create(
         player: player,
         boss_name: data["boss_name"],
@@ -75,6 +84,8 @@ class LogParser
     Player.find_or_create_by(id: player_id) do |player|
       player.name = "Unknown Player ##{player_id}"
       player.score = 0
+      player.gold = 0
+      player.xp = 0
     end
   end
 end

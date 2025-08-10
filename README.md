@@ -7,6 +7,7 @@ Battlequest API is a Ruby on Rails application that processes logs from Battlequ
 - **Log Processing:** Parses game log files and imports events (player joins, kills, item pickups, quest completions, boss kills, etc.) into the database.
 - **REST API:** Provides endpoints to query players, events, leaderboards, and dashboard statistics.
 - **Authentication:** The dashboard endpoint requires a valid API token.
+- **Requirements** Rails 8.0.2+, Ruby 3.3.2+
 
 ---
 
@@ -63,7 +64,7 @@ All endpoints are prefixed with `/api/v1/`.
   **Authentication:**  
   Pass a valid API token in the `Authorization` header:  
   `Authorization: Bearer <token>`
-  When `$ rails db:seed` is executed, it outputs an access token on the terminal:
+  When `$ bin/rails db:seed` is executed, it outputs an access token on the terminal:
   `Token de acesso criado: <your-access-token>`
   Then, it's possible to access the dashboard endpoint with
   `$ curl -H "Authorization: Bearer <your-access-token>" http://localhost:3000/api/v1/dashboard/index`
@@ -78,22 +79,22 @@ All endpoints are prefixed with `/api/v1/`.
 
 ### 2. Run migrations
 
-- `$ rails db:migrate`
+- `$ bin/rails db:migrate`
 
 ### 3. Apply seeds
 
-- `$ rails db:seed`
+- `$ bin/rails db:seed`
 
 ### 4. Run Server
 
-- `$ rails s`
+- `$ bin/rails s`
 
 ### Run tests
 
-- `$ rails test`
+- `$ bin/rails test`
 
 ### Process new logs
 
-- `$ rails log:import`
+- `$ bin/rails log:import`
 
 Only logs with a timestamp later than the last imported timestamps are considered

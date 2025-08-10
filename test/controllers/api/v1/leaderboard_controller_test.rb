@@ -1,18 +1,60 @@
 require "test_helper"
 
 class Api::V1::LeaderboardControllerTest < ActionDispatch::IntegrationTest
-  test "should rank players by score" do
-    players(:zezin)
-    players(:chiquin)
-    players(:toin)
-    players(:manezin)
+  setup do
+    @zezin = players(:zezin)
+    @chiquin = players(:chiquin)
+    @toin = players(:toin)
+    @manezin = players(:manezin)
+  end
 
-    get api_v1_leaderboard_index_url
+  test "should rank players by score based on fixtures" do
+    get api_v1_leaderboard_url
     assert_response :success
-    assert_equal 4, JSON.parse(response.body).length
-    assert_equal "Zezin", JSON.parse(response.body).last["name"]
-    assert_equal "Chiquin", JSON.parse(response.body)[2]["name"]
-    assert_equal "Toin", JSON.parse(response.body)[1]["name"]
-    assert_equal "Manezin", JSON.parse(response.body).first["name"]
+
+    leaderboard = JSON.parse(response.body)
+
+    ranked_names = leaderboard.map { |p| p["name"] }
+
+    expected_order = [ @manezin.name, @toin.name, @chiquin.name, @zezin.name ]
+
+    assert_equal expected_order, ranked_names
+    assert leaderboard.first.key?("score")
+  end
+
+  test "should rank players by gold" do
+    @manezin.update!(gold: 100)
+    @zezin.update!(gold: 500)
+    @chiquin.update!(gold: 200)
+    @toin.update!(gold: 50)
+
+    get "/api/v1/leaderboard/gold"
+    assert_response :success
+
+    leaderboard = JSON.parse(response.body)
+    ranked_names = leaderboard.map { |p| p["name"] }
+
+    expected_order = [ @zezin.name, @chiquin.name, @manezin.name, @toin.name ]
+
+    assert_equal expected_order, ranked_names
+    assert leaderboard.first.key?("gold")
+  end
+
+  test "should rank players by xp" do
+    @toin.update!(xp: 2000)
+    @manezin.update!(xp: 1500)
+    @zezin.update!(xp: 1000)
+    @chiquin.update!(xp: 500)
+
+    get "/api/v1/leaderboard/xp"
+    assert_response :success
+
+    leaderboard = JSON.parse(response.body)
+    ranked_names = leaderboard.map { |p| p["name"] }
+
+    expected_order = [ @toin.name, @manezin.name, @zezin.name, @chiquin.name ]
+
+    assert_equal expected_order, ranked_names
+    assert leaderboard.first.key?("xp")
   end
 end
