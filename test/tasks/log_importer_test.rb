@@ -8,6 +8,8 @@ class LogImporterTest < ActiveSupport::TestCase
     ItemPickup.delete_all
     BossKill.delete_all
     QuestCompletion.delete_all
+    QuestStart.delete_all
+    ChatMessage.delete_all
 
     Player.delete_all
     GameEvent.delete_all

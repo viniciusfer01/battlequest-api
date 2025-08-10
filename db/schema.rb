@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_10_202130) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_10_222357) do
   create_table "api_tokens", force: :cascade do |t|
     t.string "token"
     t.datetime "created_at", null: false
@@ -26,6 +26,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_10_202130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_boss_kills_on_player_id"
+  end
+
+  create_table "chat_messages", force: :cascade do |t|
+    t.integer "player_id"
+    t.string "message_type", null: false
+    t.text "content", null: false
+    t.datetime "event_timestamp", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_chat_messages_on_player_id"
   end
 
   create_table "game_events", force: :cascade do |t|
@@ -84,6 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_10_202130) do
   end
 
   add_foreign_key "boss_kills", "players"
+  add_foreign_key "chat_messages", "players"
   add_foreign_key "item_pickups", "players"
   add_foreign_key "kills", "players", column: "killer_id"
   add_foreign_key "kills", "players", column: "victim_id"

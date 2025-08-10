@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get "chat/index"
       get "dashboard/index"
       get "items/top"
       resources :events, only: [ :index ]
+      resources :chat, only: [ :index ]
 
       resources :players, only: [ :index ] do
         member do

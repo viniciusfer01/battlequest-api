@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player: zezin
+  message_type: chat
+  content: hello
+  event_timestamp: 2025-08-10 19:06:34
+
+two:
+  player: toin
+  message_type: chat
+  content: hey
+  event_timestamp: 2025-08-10 19:06:34
+
+three:
+  message_type: announcement
+  content: Double XP weekend starts now!
+  event_timestamp: 2025-08-10 19:06:34

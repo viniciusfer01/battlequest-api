@@ -95,6 +95,16 @@ All endpoints are prefixed with `/api/v1/`.
   Then, it's possible to access the dashboard endpoint with
   `$ curl -H "Authorization: Bearer <your-access-token>" http://localhost:3000/api/v1/dashboard/index`
 
+### Chat
+
+-`GET /chat`  
+    Lists recent chat messages and server announcements, ordered by most recent.
+
+    **Query Parameters:**
+    -`limit` (optional): The maximum number of messages to return. Defaults to `100`.
+    -`start_time` (optional): The start of the time interval to filter messages. Should be in ISO 8601 format (e.g., `2025-08-10T20:00:00Z`).
+    -`end_time` (optional): The end of the time interval to filter messages. Should be in ISO 8601 format.
+
 ---
 
 ## Setup & Usage
