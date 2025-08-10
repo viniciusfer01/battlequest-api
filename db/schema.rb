@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_10_191409) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_10_202130) do
   create_table "api_tokens", force: :cascade do |t|
     t.string "token"
     t.datetime "created_at", null: false
@@ -74,9 +74,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_10_191409) do
     t.index ["player_id"], name: "index_quest_completions_on_player_id"
   end
 
+  create_table "quest_starts", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.string "quest_id", null: false
+    t.string "quest_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_quest_starts_on_player_id"
+  end
+
   add_foreign_key "boss_kills", "players"
   add_foreign_key "item_pickups", "players"
   add_foreign_key "kills", "players", column: "killer_id"
   add_foreign_key "kills", "players", column: "victim_id"
   add_foreign_key "quest_completions", "players"
+  add_foreign_key "quest_starts", "players"
 end

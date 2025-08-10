@@ -4,12 +4,20 @@ Rails.application.routes.draw do
       get "dashboard/index"
       get "items/top"
       resources :events, only: [ :index ]
-      get "leaderboard/index"
+
       resources :players, only: [ :index ] do
         member do
           get :stats
         end
+        resources :quests, only: [] do
+          collection do
+            get :started
+            get :completed
+          end
+        end
       end
+
+
       get "/leaderboard", to: "leaderboard#index"
       get "/leaderboard/gold", to: "leaderboard#index", defaults: { type: "gold" }
       get "/leaderboard/xp", to: "leaderboard#index", defaults: { type: "xp" }

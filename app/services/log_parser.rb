@@ -48,12 +48,19 @@ class LogParser
     when "ITEM_PICKUP"
       player = self.find_or_create_placeholder_player(data["player_id"])
       ItemPickup.create(player: player, item_name: data["item"], quantity: data["qty"].to_i)
+
+    when "QUEST_START"
+      player = self.find_or_create_placeholder_player(data["player_id"])
+      QuestStart.find_or_create_by(player: player, quest_id: data["quest_id"]) do |quest_start|
+        quest_start.quest_name = data["name"]
+      end
     when "QUEST_COMPLETE"
       player = self.find_or_create_placeholder_player(data["player_id"])
       player.xp += data["xp"].to_i
       player.gold += data["gold"].to_i
       player.save!
       QuestCompletion.create(player: player, quest_id: data["quest_id"], xp_gained: data["xp"].to_i, gold_gained: data["gold"].to_i)
+      QuestStart.where(player: player, quest_id: data["quest_id"]).destroy_all
     when "BOSS_DEFEAT"
       player = self.find_or_create_placeholder_player(data["defeated_by"])
       player.xp += data["xp"].to_i
