@@ -9,6 +9,8 @@ class Api::V1::ChatControllerTest < ActionDispatch::IntegrationTest
     ChatMessage.create!(message_type: "chat", player: @player, content: "Hello world", event_timestamp: 2.days.ago)
     ChatMessage.create!(message_type: "announcement", content: "Server restarting soon", event_timestamp: 1.day.ago)
     ChatMessage.create!(message_type: "chat", player: @player, content: "GG", event_timestamp: Time.zone.now)
+    ChatMessage.create!(message_type: "chat", player: @player, content: "Old message", event_timestamp: 10.days.ago)
+    ChatMessage.create!(message_type: "announcement", content: "Welcome to the server", event_timestamp: 5.days.ago)
   end
 
   test "should get recent chat messages and announcements" do
@@ -16,7 +18,7 @@ class Api::V1::ChatControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     messages = JSON.parse(response.body)
-    assert_equal 3, messages.size
+    assert_equal 5, messages.size
     assert_equal "GG", messages.first["content"] # Most recent is first
   end
 

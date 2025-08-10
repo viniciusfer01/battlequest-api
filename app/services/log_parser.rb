@@ -78,6 +78,21 @@ class LogParser
       # puts "data['points']: #{data["points"]}"
       # puts "inspect data: #{data.inspect}"
       player.save!
+    when "MESSAGE"
+      player = self.find_or_create_placeholder_player(data["player_id"])
+      ChatMessage.create!(
+        player: player,
+        message_type: "chat",
+        content: data["message"],
+        event_timestamp: timestamp
+      )
+    when "SERVER_ANNOUNCEMENT"
+      ChatMessage.create!(
+        player: nil, # No player for server announcements
+        message_type: "announcement",
+        content: data["text"],
+        event_timestamp: timestamp
+      )
     else
       # puts "Evento não tratado: #{event_type}"
     end
