@@ -7,6 +7,7 @@ Battlequest API is a Ruby on Rails application that processes logs from Battlequ
 - **Log Processing:** Parses game log files and imports events (player joins, kills, item pickups, quest completions, boss kills, etc.) into the database.
 - **REST API:** Provides endpoints to query players, events, leaderboards, and dashboard statistics.
 - **Authentication:** The dashboard endpoint requires a valid API token.
+- **Requirements** Rails 8.0.2+, Ruby 3.3.2+
 
 ---
 
