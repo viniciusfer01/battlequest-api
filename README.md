@@ -32,10 +32,7 @@ All endpoints are prefixed with `/api/v1/`.
 - `GET /api/v1/players`  
   List all players with basic information.
 
-- `GET /players`
-  Lists all players.
-
-  - Filters: name (partial match), min_score, min_kills
+  - Filters: name (partial match), min_score, max_score, min_kills, etc
 
   - Pagination: page (default: 1), per_page (default: 5, max: 100)
 
