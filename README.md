@@ -32,6 +32,15 @@ All endpoints are prefixed with `/api/v1/`.
 - `GET /api/v1/players`  
   List all players with basic information.
 
+- `GET /players`
+  Lists all players.
+
+  - Filters: name (partial match), min_score, min_kills
+
+  - Pagination: page (default: 1), per_page (default: 5, max: 100)
+
+  - Example: `/players?name=dragon&min_kills=10&page=2`
+
 - `GET /api/v1/players/:id/stats`  
   Shows detailed stats for a specific player, including:
 
@@ -58,6 +67,12 @@ All endpoints are prefixed with `/api/v1/`.
 - `GET /api/v1/leaderboard`  
   List players ordered by score (default).
 
+  - Filters: name (partial match), min_score, min_gold
+
+  - Pagination: page (default: 1), per_page (default: 5, max: 100)
+
+  - Example: `/leaderboard?min_gold=50&per_page=20`
+
 - `GET api/v1/leaderboard/gold`
 
   Lists players ordered by total gold.
@@ -69,12 +84,22 @@ All endpoints are prefixed with `/api/v1/`.
 ### Items
 
 - `GET /api/v1/items/top`  
-  List top 50 most collected items at a time, ordered by quantity.
+  List the top looted items.
+
+  - Filters: name (partial match), gt (greater than x), gte (greater than or equal to x), lt (lower than x), lte (lower than or equal to x), eq (for total quantity)
+
+  - Pagination: page (default: 1), per_page (default: 5, max: 100)
+
+  - Example: `/items/top?name=potion&gte=100`
 
 ### Events
 
-- `GET /api/v1/events?limit=N`  
-  List the most recent N game events (default: 50).
+- `GET api/v1/events`
+  List the last logged events.
+
+  - Pagination: page (default: 1), per_page (default: 25, max: 200)
+
+  - Example: `/events?page=3&per_page=50`
 
 ### Dashboard (Requires Authentication)
 
