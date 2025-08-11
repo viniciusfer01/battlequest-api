@@ -1,7 +1,7 @@
 class Api::V1::PlayersController < ApplicationController
   def index
     players = Player.all
-    players = apply_filters(players, params.slice(:name, :min_xp, :max_xp, :min_score, :min_kills))
+    players = apply_filters(players, params.slice(:name, :min_xp, :max_xp, :min_score, :max_score, :min_kills, :max_kills, :min_gold, :max_gold))
     players = paginate(players, default_per_page: 5, max_per_page: 100)
     players = players.select(:id, :name, :score, :gold, :xp)
 
