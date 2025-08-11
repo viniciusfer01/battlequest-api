@@ -107,31 +107,63 @@ All endpoints are prefixed with `/api/v1/`.
 
 ---
 
-## Setup & Usage
+## Setup & Usage (with Docker)
+This project is configured to run in a Docker container, providing a consistent development environment.
 
-### 1. Install dependencies
+### Prerequisites
+Docker and Docker Compose: Ensure you have both installed on your system.
 
-- `$ bundle install`
+VS Code + Dev Containers extension: Install Visual Studio Code and the ms-vscode-remote.remote-containers extension.
 
-### 2. Create DB and run migrations
+### 1. Start the Development Container
+Clone the repository to your local machine.
 
-- `$ bin/rails db:create`
-- `$ bin/rails db:migrate`
+Open the project folder in VS Code.
 
-### 3. Apply seeds
+A notification will appear asking to "Reopen in Container". Click it.
 
-- `$ bin/rails db:seed`
+VS Code will build the Docker image and start the container. This may take a few minutes on the first run.
 
-### 4. Run Server
+### 2. Set Up the Database
+Once the container is running, open a new terminal within VS Code (Terminal > New Terminal). All subsequent commands should be run inside this container terminal.
 
-- `$ bin/rails s`
+`
+Bash
 
-### Run tests
+# Create the SQLite database
+bin/rails db:create
 
-- `$ bin/rails test`
+# Run database migrations
+bin/rails db:migrate
+`
 
-### Process new logs
+### 3. Apply Seeds (Initial Data Load)
+This command will parse the game_log_large.txt file and populate your database. It will also generate a valid API token for the dashboard.
 
-- `$ bin/rails log:import`
+`
+Bash
 
-Only logs with a timestamp later than the last imported timestamps are considered
+bin/rails db:seed
+`
+
+### 4. Run the Server
+Your Rails server is automatically started by Docker Compose. You can access the API at http://localhost:3000.
+
+### 5. Run Tests
+To run the test suite, use the following command in the container terminal:
+
+`
+Bash
+
+bin/rails test
+`
+
+### 6. Process New Logs (Continuous Update)
+To process new lines that have been added to the log file after the initial seed, run:
+
+`
+Bash
+
+bin/rails log:import
+`
+
